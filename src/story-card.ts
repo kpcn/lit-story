@@ -20,7 +20,7 @@ export class StoryCard extends LitElement {
     this.addEventListener('entered', () => {
       if (this._slottedMedia) {
         this._slottedMedia.currentTime = 0;
-        this._slottedMedia.play();
+        this._slottedMedia.play(); // TODO: fixed race condition between play and pause while pan event is fired
       }
     });
 
