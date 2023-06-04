@@ -7,8 +7,16 @@
     <title>Vite + Lit + TS</title>
     <link rel="stylesheet" href="./src/index.css" />
     <script type="module" src="/src/story-viewer.ts"></script>
+    <script type="module" src="/src/story-card.ts"></script>
   </head>
   <body>
-    <story-viewer></story-viewer>
+    
+    <story-viewer>
+      <story-card>
+        <img slot="media" src="./src/assets/cute-dog--03.jpeg">
+        <h1>Cute Little Dog</h1>
+        <p>This is very cute</p>
+      </story-card>
+    </story-viewer>
   </body>
 </html>

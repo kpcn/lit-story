@@ -18,7 +18,7 @@ export class StoryViewer extends LitElement {
   `;
 
   render() {
-    return html`<h1>Story Viewer</h1>`;
+    return html`<slot></slot>`;
   }
 }
 
