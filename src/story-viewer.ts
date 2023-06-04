@@ -34,9 +34,15 @@ export class StoryViewer extends LitElement {
     deltaX = isFinal ? 0 : deltaX;
 
     const width = this.clientWidth;
+    const minScale = 0.8;
     Array.from(this.children).forEach((el: Element, index) => {
       const x = (index - this.index) * width + deltaX;
-      (el as HTMLElement).style.transform = `translate3d(${x}px,0,0)`;
+      const u = deltaX / width + (index - this.index);
+      const v = -Math.abs(u * (1 - minScale)) + 1;
+      const scale = Math.max(v, minScale);
+      (
+        el as HTMLElement
+      ).style.transform = `translate3d(${x}px,0,0) scale(${scale})`;
     });
     super.update(changedProperties);
   }
