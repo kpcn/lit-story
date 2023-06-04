@@ -9,9 +9,11 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "hammerjs": "2.0.8",
     "lit": "^2.7.2"
   },
   "devDependencies": {
+    "@types/hammerjs": "2.0.41",
     "typescript": "^5.0.2",
     "vite": "^4.3.9"
   }

@@ -1,11 +1,17 @@
 lockfileVersion: '6.0'
 
 dependencies:
+  hammerjs:
+    specifier: 2.0.8
+    version: 2.0.8
   lit:
     specifier: ^2.7.2
     version: 2.7.2
 
 devDependencies:
+  '@types/hammerjs':
+    specifier: 2.0.41
+    version: 2.0.41
   typescript:
     specifier: ^5.0.2
     version: 5.0.2
@@ -223,6 +229,10 @@ packages:
       '@lit-labs/ssr-dom-shim': 1.1.1
     dev: false
 
+  /@types/hammerjs@2.0.41:
+    resolution: {integrity: sha512-ewXv/ceBaJprikMcxCmWU1FKyMAQ2X7a9Gtmzw8fcg2kIePI1crERDM818W+XYrxqdBBOdlf2rm137bU+BltCA==}
+    dev: true
+
   /@types/trusted-types@2.0.3:
     resolution: {integrity: sha512-NfQ4gyz38SL8sDNrSixxU2Os1a5xcdFxipAFxYEuLUlvU2uDwS4NUpsImcf1//SlWItCVMMLiylsxbmNMToV/g==}
     dev: false
@@ -264,6 +274,11 @@ packages:
     requiresBuild: true
     dev: true
     optional: true
+
+  /hammerjs@2.0.8:
+    resolution: {integrity: sha512-tSQXBXS/MWQOn/RKckawJ61vvsDpCom87JgxiYdGwHdOa0ht0vzUWDlfioofFCRU0L+6NGDt6XzbgoJvZkMeRQ==}
+    engines: {node: '>=0.8.0'}
+    dev: false
 
   /lit-element@3.3.2:
     resolution: {integrity: sha512-xXAeVWKGr4/njq0rGC9dethMnYCq5hpKYrgQZYTzawt9YQhMiXfD+T1RgrdY3NamOxwq2aXlb0vOI6e29CKgVQ==}

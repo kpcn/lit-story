@@ -1,18 +1,35 @@
 import { LitElement, PropertyValues, css, html } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
+import { customElement, property, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
+import 'hammerjs';
 
 @customElement('story-viewer')
 export class StoryViewer extends LitElement {
+  @state() _panData: { isFinal?: boolean; deltaX?: number } = {};
+
+  constructor() {
+    super();
+    this.index = 0;
+    new Hammer(this).on('pan', (e: HammerInput) => (this._panData = e));
+  }
+
   @property({ type: Number }) index: number = 0;
 
-  update(changeProperties: PropertyValues) {
-    super.update(changeProperties);
+  update(changedProperties: PropertyValues) {
+    let { deltaX = 0, isFinal = false } = this._panData;
+
+    if (!changedProperties.has('index') && isFinal) {
+      deltaX > 0 ? this._previous() : this._next();
+    }
+
+    deltaX = isFinal ? 0 : deltaX;
+
     const width = this.clientWidth;
     Array.from(this.children).forEach((el: Element, index) => {
-      const x = (index - this.index) * width;
+      const x = (index - this.index) * width + deltaX;
       (el as HTMLElement).style.transform = `translate3d(${x}px,0,0)`;
     });
+    super.update(changedProperties);
   }
 
   _next() {
@@ -61,6 +78,7 @@ export class StoryViewer extends LitElement {
       position: absolute;
       width: 100%;
       height: calc(100% - 20px);
+      transition: transform 0.35s ease-out;
     }
 
     svg {
