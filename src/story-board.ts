@@ -1,10 +1,14 @@
 import { LitElement, PropertyValues, css, html } from 'lit';
-import { customElement, state } from 'lit/decorators.js';
+import { customElement, property, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import 'hammerjs';
 
-@customElement('story-viewer')
-export class StoryViewer extends LitElement {
+@customElement('story-board')
+export class StoryBoard extends LitElement {
+  @property()
+  docsHint =
+    'Component for displaying a story card components and HTML element.';
+
   @state() private _index: number = 0;
   @state() _panData: { isFinal?: boolean; deltaX?: number } = {};
 
@@ -132,6 +136,6 @@ export class StoryViewer extends LitElement {
 
 declare global {
   interface HTMLElementTagNameMap {
-    'story-viewer': StoryViewer;
+    'story-board': StoryBoard;
   }
 }

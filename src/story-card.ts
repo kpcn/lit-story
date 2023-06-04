@@ -1,8 +1,12 @@
 import { LitElement, css, html } from 'lit';
-import { customElement, query } from 'lit/decorators.js';
+import { customElement, property, query } from 'lit/decorators.js';
 
 @customElement('story-card')
 export class StoryCard extends LitElement {
+  @property()
+  docsHint =
+    'Card component for displaying a story. Image and text are optional.';
+
   @query('slot[name="media"]')
   private _mediaSlot!: HTMLSlotElement;
 
