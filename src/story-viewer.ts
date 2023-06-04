@@ -21,3 +21,9 @@ export class StoryViewer extends LitElement {
     return html`<h1>Story Viewer</h1>`;
   }
 }
+
+declare global {
+  interface HTMLElementTagNameMap {
+    'story-viewer': StoryViewer;
+  }
+}
