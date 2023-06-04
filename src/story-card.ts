@@ -1,8 +1,43 @@
 import { LitElement, css, html } from 'lit';
-import { customElement } from 'lit/decorators.js';
+import { customElement, query } from 'lit/decorators.js';
 
 @customElement('story-card')
 export class StoryCard extends LitElement {
+  @query('slot[name="media"]')
+  private _mediaSlot!: HTMLSlotElement;
+
+  private get _slottedMedia(): HTMLMediaElement | null {
+    const el = this._mediaSlot && this._mediaSlot.assignedNodes()[0];
+    return el instanceof HTMLMediaElement ? el : null;
+  }
+
+  constructor() {
+    super();
+    this.addEventListener('entered', () => {
+      if (this._slottedMedia) {
+        this._slottedMedia.currentTime = 0;
+        this._slottedMedia.play();
+      }
+    });
+
+    this.addEventListener('exited', () => {
+      if (this._slottedMedia) {
+        this._slottedMedia.pause();
+      }
+    });
+  }
+
+  render() {
+    return html`
+      <div id="media">
+        <slot name="media"></slot>
+      </div>
+      <div id="content">
+        <slot></slot>
+      </div>
+    `;
+  }
+
   static styles = css`
     #media {
       height: 100%;
@@ -29,16 +64,6 @@ export class StoryCard extends LitElement {
       margin: 0;
     }
   `;
-  render() {
-    return html`
-      <div id="media">
-        <slot name="media"></slot>
-      </div>
-      <div id="content">
-        <slot></slot>
-      </div>
-    `;
-  }
 }
 
 declare global {

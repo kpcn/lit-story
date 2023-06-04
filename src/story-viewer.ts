@@ -1,19 +1,28 @@
 import { LitElement, PropertyValues, css, html } from 'lit';
-import { customElement, property, state } from 'lit/decorators.js';
+import { customElement, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import 'hammerjs';
 
 @customElement('story-viewer')
 export class StoryViewer extends LitElement {
+  @state() private _index: number = 0;
   @state() _panData: { isFinal?: boolean; deltaX?: number } = {};
+
+  get index() {
+    return this._index;
+  }
+
+  set index(value: number) {
+    this.children[this._index].dispatchEvent(new CustomEvent('exited'));
+    this.children[value].dispatchEvent(new CustomEvent('entered'));
+    this._index = value;
+  }
 
   constructor() {
     super();
     this.index = 0;
     new Hammer(this).on('pan', (e: HammerInput) => (this._panData = e));
   }
-
-  @property({ type: Number }) index: number = 0;
 
   update(changedProperties: PropertyValues) {
     let { deltaX = 0, isFinal = false } = this._panData;
